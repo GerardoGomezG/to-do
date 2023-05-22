@@ -2,9 +2,11 @@
   "name": "todo",
   "version": "1.0.0",
   "description": "To Do List",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
     "prepare": "husky install"
   },
   "repository": {
@@ -21,7 +23,7 @@
     "js",
     "javascript"
   ],
-  "author": "Gerardo Gómez González",
+  "author": "Gerardo Gómez González <ing.gerardogomez@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/GerardoGomezG/to-do/issues"
@@ -37,11 +39,19 @@
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",
     "stylelint-csstree-validator": "^1.9.0",
-    "stylelint-scss": "^3.21.0"
+    "stylelint-scss": "^3.21.0",
+    "webpack": "^5.83.1",
+    "webpack-cli": "^5.1.1"
   },
-  "lint-staged":{
-    "*.(js)": ["eslint --fix"],
-    "*.(css|scss)": ["stylelint --fix"],
-    "*.(html)": ["hint"]
+  "lint-staged": {
+    "*.(js)": [
+      "eslint --fix"
+    ],
+    "*.(css|scss)": [
+      "stylelint --fix"
+    ],
+    "*.(html)": [
+      "hint"
+    ]
   }
 }
