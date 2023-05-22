@@ -1,0 +1,47 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "To Do List",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GerardoGomezG/to-do.git"
+  },
+  "keywords": [
+    "to",
+    "do",
+    "list",
+    "webpack",
+    "html",
+    "css",
+    "js",
+    "javascript"
+  ],
+  "author": "Gerardo Gómez González",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GerardoGomezG/to-do/issues"
+  },
+  "homepage": "https://github.com/GerardoGomezG/to-do#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.27.5",
+    "hint": "^7.1.8",
+    "husky": "^8.0.3",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^21.0.0",
+    "stylelint-csstree-validator": "^1.9.0",
+    "stylelint-scss": "^3.21.0"
+  },
+  "lint-staged":{
+    "*.(js)": ["eslint --fix"],
+    "*.(css|scss)": ["stylelint --fix"],
+    "*.(html)": ["hint"]
+  }
+}
