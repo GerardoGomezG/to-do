@@ -8,14 +8,27 @@
     <link rel="icon" type="image/x-icon" href="./assets/favicon.svg">
 </head>
 <body>
-    <div>
-        <div class="headerContainer">
+    <span class="allContainer">
+        <div class="h1Container">
             <h1>Today's To Do</h1>
             <img src="./assets/reload.svg" alt="reload">
         </div>
-    </div>
-    <template>
         <hr>
-    </template>
+        <div class="mainInputContainer">
+            <input type="text" id="taskInput" name="taskInput" placeholder="Add to your list..."></input>
+        </div>
+        <hr>
+        <ul class="tasksList">
+            <li class="taskListItem"><input type="checkbox">wash the dogs <img src="./assets/verticalDots.svg" alt="verticalDots"></li>
+            <hr>
+            <li class="taskListItem"><input type="checkbox">Complete To Do list project <img src="./assets/verticalDots.svg" alt="verticalDots"></li>
+            <hr>
+            <li class="taskListItem"><input type="checkbox">fix car <img src="./assets/verticalDots.svg" alt="verticalDots"></li>
+            <hr>
+        </ul>
+        <div class="h3Container">
+            <h3>Clear all completed</h3>
+        </div>
+    </span>
 </body>
 </html>
