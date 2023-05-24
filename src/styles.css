@@ -1,0 +1,136 @@
+@font-face {
+  font-family: firstFont;
+  src: url(./assets/PrimaSerif_BT_Roman.ttf);
+}
+
+@font-face {
+  font-family: secondFont;
+  src: url(./assets/Merlo-RoundBoldItalic.otf);
+}
+
+@font-face {
+  font-family: thirdFont;
+  src: url(./assets/Yalta_Sans_W01.ttf);
+}
+
+:root {
+  --width: 80vw;
+  --max-width: 35em;
+  --color: lightgray;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
+
+span {
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.4);
+  width: var(--width);
+  max-width: var(--max-width);
+}
+
+h1 {
+  margin: 0 1.5rem;
+  padding: 0;
+  font-family: firstFont, sans-serif;
+  font-weight: 500;
+}
+
+#taskInput {
+  margin: 0 1.5rem;
+  padding: 0;
+  border: none;
+  font-family: secondFont, Arial, Helvetica, sans-serif;
+  font-size: 2em;
+  font-weight: 300;
+  width: 80%;
+}
+
+#taskInput:focus {
+  outline: none;
+}
+
+#taskInput::placeholder {
+  font-family: secondFont, Arial, Helvetica, sans-serif;
+  font-size: 1em;
+  font-weight: 300;
+  letter-spacing: 1px;
+  color: #858586;
+}
+
+#taskInput:placeholder-shown {
+  text-overflow: ellipsis;
+}
+
+h3 {
+  margin: 0;
+  padding: 0;
+  font-family: thirdFont, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  color: #858586;
+}
+
+img {
+  margin: 0 1.5rem 0 auto;
+  width: 1.5em;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+}
+
+hr {
+  margin: 0;
+  width: var(--width);
+  max-width: var(--max-width);
+  border: 1px solid var(--color);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem 0;
+  width: var(--width);
+  max-width: var(--max-width);
+}
+
+li {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  margin: 1rem 0;
+  font-family: firstFont, sans-serif;
+  font-size: 1.5em;
+}
+
+input[type=checkbox] {
+  transform: scale(1.5);
+  margin: 0 1em 0 2em;
+}
+
+.textLineThrough {
+  text-decoration: line-through;
+}
+
+.h1Container {
+  justify-content: space-between;
+}
+
+.h3Container {
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
