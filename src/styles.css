@@ -14,17 +14,19 @@
 }
 
 :root {
-  --width: 35em;
+  --width: 80vw;
+  --max-width: 35em;
   --color: lightgray;
 }
 
 body {
-  margin: 0;
-  padding: 0;
   display: flex;
-  height: 100vh;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  height: 100vh;
 }
 
 span {
@@ -32,8 +34,9 @@ span {
   grid-template-columns: auto;
   justify-content: center;
   align-items: center;
-  width: fit-content;
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.4);
+  width: var(--width);
+  max-width: var(--max-width);
 }
 
 h1 {
@@ -45,16 +48,28 @@ h1 {
 
 #taskInput {
   margin: 0 1.5rem;
+  padding: 0;
   border: none;
   font-family: secondFont, Arial, Helvetica, sans-serif;
-  font-size: 2rem;
+  font-size: 2em;
+  font-weight: 300;
+  width: 80%;
+}
+
+#taskInput:focus {
+  outline: none;
+}
+
+#taskInput::placeholder {
+  font-family: secondFont, Arial, Helvetica, sans-serif;
+  font-size: 1em;
   font-weight: 300;
   letter-spacing: 1px;
   color: #858586;
 }
 
-#taskInput:focus {
-  outline: none;
+#taskInput:placeholder-shown {
+  text-overflow: ellipsis;
 }
 
 h3 {
@@ -75,6 +90,7 @@ img {
 hr {
   margin: 0;
   width: var(--width);
+  max-width: var(--max-width);
   border: 1px solid var(--color);
 }
 
@@ -86,8 +102,9 @@ ul {
 div {
   display: flex;
   flex-direction: row;
-  width: var(--width);
   margin: 1rem 0;
+  width: var(--width);
+  max-width: var(--max-width);
 }
 
 li {
@@ -96,12 +113,12 @@ li {
   width: auto;
   margin: 1rem 0;
   font-family: firstFont, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.5em;
 }
 
 input[type=checkbox] {
   transform: scale(1.5);
-  margin: 0 1rem 0 2rem;
+  margin: 0 1em 0 2em;
 }
 
 .textLineThrough {

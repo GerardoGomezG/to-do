@@ -1,4 +1,4 @@
-import './style.css';
+import './styles.css';
 import './index.html';
 
 const checkbox = document.querySelectorAll('input[type=checkbox]');
