@@ -29,7 +29,7 @@ body {
   height: 100vh;
 }
 
-span {
+.allContainer {
   display: grid;
   grid-template-columns: auto;
   justify-content: center;
@@ -111,9 +111,12 @@ li {
   display: flex;
   flex-direction: row;
   width: auto;
-  margin: 1rem 0;
+  padding: 1rem 0;
   font-family: firstFont, sans-serif;
   font-size: 1.5em;
+  border-bottom: 2px solid var(--color);
+  justify-content: center;
+  user-select: none;
 }
 
 input[type=checkbox] {
@@ -121,7 +124,7 @@ input[type=checkbox] {
   margin: 0 1em 0 2em;
 }
 
-.textLineThrough {
+input[type=checkbox]:checked + span {
   text-decoration: line-through;
 }
 
