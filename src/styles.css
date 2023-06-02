@@ -130,7 +130,6 @@ input[type=textarea] {
 
 input[type=textarea]:focus {
   outline: none;
-  background-color: var(--editColor);
 }
 
 input[type=checkbox] {
