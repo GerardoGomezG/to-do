@@ -74,7 +74,9 @@ document.addEventListener('click', (e) => {
       element.querySelector('img').setAttribute('alt', 'dots');
     }
   });
-  if (document.activeElement.matches('.ta')) {
+  if (document.activeElement.matches('.ta') || (e.target.alt === 'dots')) {
+    // Focuses on textarea input if verticalDots img is clicked
+    e.target.parentElement.querySelector('.ta').focus();
     editTask(e.target);
   }
 });
