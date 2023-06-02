@@ -17,6 +17,7 @@
   --width: 80vw;
   --max-width: 35em;
   --color: lightgray;
+  --editColor: lightyellow;
 }
 
 body {
@@ -112,19 +113,33 @@ li {
   flex-direction: row;
   width: auto;
   padding: 1rem 0;
-  font-family: firstFont, sans-serif;
-  font-size: 1.5em;
   border-bottom: 2px solid var(--color);
   justify-content: center;
-  user-select: none;
+}
+
+.yellow_li {
+  background-color: var(--editColor);
+}
+
+input[type=textarea] {
+  font-family: firstFont, sans-serif;
+  font-size: 1.5em;
+  border: none;
+  width: 75%;
+}
+
+input[type=textarea]:focus {
+  outline: none;
+  background-color: var(--editColor);
 }
 
 input[type=checkbox] {
   transform: scale(1.5);
   margin: 0 1em 0 2em;
+  background-color: transparent;
 }
 
-input[type=checkbox]:checked + span {
+input[type=checkbox]:checked + input[type=textarea] {
   text-decoration: line-through;
 }
 
