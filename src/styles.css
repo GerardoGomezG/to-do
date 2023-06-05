@@ -17,6 +17,7 @@
   --width: 80vw;
   --max-width: 35em;
   --color: lightgray;
+  --editColor: lightyellow;
 }
 
 body {
@@ -29,7 +30,7 @@ body {
   height: 100vh;
 }
 
-span {
+.allContainer {
   display: grid;
   grid-template-columns: auto;
   justify-content: center;
@@ -111,17 +112,34 @@ li {
   display: flex;
   flex-direction: row;
   width: auto;
-  margin: 1rem 0;
+  padding: 1rem 0;
+  border-bottom: 2px solid var(--color);
+  justify-content: center;
+}
+
+.yellow_li {
+  background-color: var(--editColor);
+}
+
+input[type=textarea] {
   font-family: firstFont, sans-serif;
   font-size: 1.5em;
+  border: none;
+  width: 75%;
+}
+
+input[type=textarea]:focus {
+  background-color: var(--editColor);
+  outline: none;
 }
 
 input[type=checkbox] {
   transform: scale(1.5);
   margin: 0 1em 0 2em;
+  background-color: transparent;
 }
 
-.textLineThrough {
+input[type=checkbox]:checked + input[type=textarea] {
   text-decoration: line-through;
 }
 
