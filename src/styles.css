@@ -129,6 +129,7 @@ input[type=textarea] {
 }
 
 input[type=textarea]:focus {
+  background-color: var(--editColor);
   outline: none;
 }
 

@@ -3,21 +3,46 @@ import './index.html';
 import verticalDots from './assets/verticalDots.svg';
 import trash from './assets/trash.svg';
 
-const savedTasks = [];
-const tasksList = document.querySelector('#tasksList');
-const newTaskInput = document.querySelector('#newTaskInput');
-let liElements = document.querySelectorAll('li');
-let checkbox = document.querySelectorAll('.cb');
+let savedTasks = []; // Array to save tasks
+const tasksList = document.querySelector('#tasksList'); // List container
+const newTaskInput = document.querySelector('#newTaskInput'); // New task input
+let liElements = document.querySelectorAll('li'); // List of <li>
+let checkbox = document.querySelectorAll('.cb'); // List of input type = checkbox
 const clearAllCompleted = document.querySelector('.h3Container');
 
-function addTask(description, checkStatus) {
+function loadSavedTasks() {
+  savedTasks = JSON.parse(localStorage.getItem('savedTasks'));
+  savedTasks.forEach((item) => {
+    const li = document.createElement('li');
+    li.setAttribute('id', liElements.length);
+    const cb = document.createElement('input');
+    cb.setAttribute('type', 'checkbox');
+    cb.checked = item.completed;
+    cb.classList.add('cb');
+    const input = document.createElement('input');
+    input.setAttribute('type', 'textarea');
+    input.value = item.description;
+    input.classList.add('ta');
+    const image = document.createElement('img');
+    image.src = verticalDots;
+    image.alt = 'menu';
+    li.prepend(cb);
+    li.appendChild(input);
+    li.appendChild(image);
+    tasksList.appendChild(li);
+    checkbox = document.querySelectorAll('.cb');
+    liElements = document.querySelectorAll('li');
+  });
+}
+
+function addTask(description) {
   const li = document.createElement('li');
+  li.setAttribute('id', liElements.length);
   const cb = document.createElement('input');
   const input = document.createElement('input');
   const image = document.createElement('img');
-  const task = [];
   cb.setAttribute('type', 'checkbox');
-  cb.checked = checkStatus;
+  cb.checked = false;
   cb.classList.add('cb');
   input.setAttribute('type', 'textarea');
   input.value = description;
@@ -30,26 +55,14 @@ function addTask(description, checkStatus) {
   tasksList.appendChild(li);
   checkbox = document.querySelectorAll('.cb');
   liElements = document.querySelectorAll('li');
-  // Task saving in an array element
-  task.push({ description, completed: checkStatus, index: savedTasks.length });
-  savedTasks.push(task);
-  // Local-Storage saving
+  savedTasks.push({ description, completed: cb.checked, index: savedTasks.length });
   localStorage.setItem('savedTasks', JSON.stringify(savedTasks));
 }
 
 function editTask(x) {
   x.parentElement.classList.add('yellow_li');
-  x.classList.add('yellow_li');
   x.parentElement.querySelector('img').setAttribute('src', trash);
   x.parentElement.querySelector('img').setAttribute('alt', 'delete');
-}
-
-function clearCompleted() {
-  checkbox.forEach((element) => {
-    if (element.checked) {
-      element.parentElement.remove(); // Deletes the selected tasks
-    }
-  });
 }
 
 newTaskInput.addEventListener('keydown', (e) => {
@@ -60,16 +73,56 @@ newTaskInput.addEventListener('keydown', (e) => {
   }
 });
 
-clearAllCompleted.addEventListener('click', () => clearCompleted());
+document.addEventListener('keyup', (e) => {
+  if (e.target.matches('.ta')) {
+    const el = e.target.parentElement;
+    savedTasks.splice(el.id, 1, {
+      description: e.target.value,
+      completed: e.target.checked,
+      index: el.id,
+    });
+    localStorage.setItem('savedTasks', JSON.stringify(savedTasks));
+  }
+});
+
+clearAllCompleted.addEventListener('click', () => {
+  checkbox.forEach((element) => {
+    if (element.checked) {
+      element.parentElement.remove(); // Deletes the selected tasks
+    }
+  });
+  checkbox = document.querySelectorAll('.cb');
+  liElements = document.querySelectorAll('li');
+  savedTasks = savedTasks.filter((savedTasks) => savedTasks.completed === false);
+  localStorage.removeItem('savedTasks');
+  let i = 0;
+  liElements.forEach((element) => {
+    element.setAttribute('id', i);
+    savedTasks[i].index = i;
+    localStorage.setItem('savedTasks', JSON.stringify(savedTasks));
+    i += 1;
+  });
+});
 
 document.addEventListener('click', (e) => {
   if (e.target.alt === 'delete') {
-    e.target.parentElement.remove();
+    const el = e.target.parentElement;
+    savedTasks.splice(el.id, 1);
+    el.remove();
+    checkbox = document.querySelectorAll('.cb');
+    liElements = document.querySelectorAll('li');
+    localStorage.removeItem('savedTasks');
+    let i = 0;
+    liElements.forEach((element) => {
+      element.setAttribute('id', i);
+      savedTasks[i].index = i;
+      localStorage.setItem('savedTasks', JSON.stringify(savedTasks));
+      i += 1;
+    });
   }
   liElements.forEach((element) => {
     if (element.matches('.yellow_li')) {
       element.classList.remove('yellow_li');
-      element.querySelector('.ta').classList.remove('yellow_li');
       element.querySelector('img').setAttribute('src', verticalDots);
       element.querySelector('img').setAttribute('alt', 'menu');
     }
@@ -79,13 +132,29 @@ document.addEventListener('click', (e) => {
     e.target.parentElement.querySelector('.ta').focus();
     editTask(e.target);
   }
+  if (e.target.matches('.cb')) {
+    const el = e.target.parentElement;
+    savedTasks.splice(el.id, 1, {
+      description: el.querySelector('.ta').value,
+      completed: e.target.checked,
+      index: el.id,
+    });
+    localStorage.setItem('savedTasks', JSON.stringify(savedTasks));
+  }
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Cambiar la lógica del Local Storage porque se puede estar almacenando otras cosas
-  if (localStorage.length === 0) {
-    addTask('Wash the dogs', false);
-    addTask('Complete To Do list project', false);
-    addTask('fix car', false);
+  let flag = false;
+  for (let i = 0; i < localStorage.length; i += 1) {
+    if (localStorage.key(i) === 'savedTasks') {
+      flag = true;
+      break;
+    }
+  }
+  if (flag) loadSavedTasks();
+  else {
+    addTask('Wash the dogs');
+    addTask('Complete To Do list project');
+    addTask('fix car');
   }
 });
